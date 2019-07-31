@@ -1,4 +1,6 @@
-import calculate
+from calc.calculate import Calculator
+
+calculator = Calculator()
 
 
 def init():
@@ -6,13 +8,13 @@ def init():
     b = int(input('Второе число '))
     d = input('Введите одно из действий: +, -, *, /: ')
 
-    print('{} {} {} = {}'.format(a, d, b, calculate.calc(a, b, d)))
+    print('{} {} {} = {}'.format(a, d, b, calculator.calc(a, b, d)))
     again()
 
 
 def again():
     ans = input('Хотите снова? Нажмите Д(да) или Н(нет)')
-    if ans.upper() == 'Д':
+    if ans.upper() == 'Д' or ans.upper() == 'Да':
         init()
     else:
         print('Спасибо за внимание')
