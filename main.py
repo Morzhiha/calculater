@@ -1,4 +1,4 @@
-import service
+from menuBaseCalc import MenuBaseCalc
 
-service.init()
+MenuBaseCalc().mainMenu()
 
