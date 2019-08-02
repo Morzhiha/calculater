@@ -11,7 +11,5 @@ class Calculator:
         return a * b
 
     def div(self, a, b):
-        if b == 0:
-            return 0
         return a / b
 

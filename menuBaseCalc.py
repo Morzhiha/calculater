@@ -6,7 +6,7 @@ class MenuBaseCalc:
     def __init__(self):
         self.calculator = Calculator()
 
-        self.operatorsList = {'+': self.calculator.sum, '-': self.calculator.sub,
+        self.methodsList = {'+': self.calculator.sum, '-': self.calculator.sub,
                          '*': self.calculator.multi, '/': self.calculator.div}
 
     def mainMenu(self):
@@ -31,7 +31,7 @@ class MenuBaseCalc:
         return a, operator, b
 
     def getResult(self, a, operator, b):
-        return self.operatorsList[operator](a, b)
+        return self.methodsList[operator](a, b)
 
     def answer(self, s):
         print('{} {} {} = {}'.format(s[0], s[1], s[2], self.getResult(s[0], s[1], s[2])))
