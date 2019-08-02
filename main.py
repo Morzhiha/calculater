@@ -1,4 +1,4 @@
-from menuBaseCalc import MenuBaseCalc
+from menu.menuBaseCalc import MenuBaseCalc
 
 MenuBaseCalc().mainMenu()
 

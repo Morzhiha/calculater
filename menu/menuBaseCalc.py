@@ -26,23 +26,26 @@ class MenuBaseCalc:
         b = input('Второе число ')
         b = self.isNumber(b)
         if operator == '/':
-            while b == 0:
-                b = input('Делить на ноль нельзя! Введите ещё раз второе число ')
+            b = self.divisionByZero(b)
         return a, operator, b
 
     def getResult(self, a, operator, b):
         return self.methodsList[operator](a, b)
 
-    def answer(self, s):
-        print('{} {} {} = {}'.format(s[0], s[1], s[2], self.getResult(s[0], s[1], s[2])))
+    def answer(self, numbers):
+        a, operator, b = numbers
+        print('{} {} {} = {}'.format(a, operator, b, self.getResult(a, operator, b)))
 
-    def isNumber(self, a):
-
-        while not str(a).isdigit():
-            a = input('Некорректный формат данных! Введите ещё раз число ')
-
-        return int(a)
+    def isNumber(self, num):
+        while not str(num).isdigit():
+            num = input('Некорректный формат данных! Введите ещё раз число ')
+        return int(num)
 
     def isOperator(self, operator):
-        while operator not in ('+', '-', '*', '/'):
+        while operator not in self.methodsList.keys():
             operator = input('Неизвестная операция! Введите ещё раз одно из действий: +, -, *, /: ')
+
+    def divisionByZero(self, b):
+        while b == 0:
+            b = input('Делить на ноль нельзя! Введите ещё раз второе число ')
+        return b
