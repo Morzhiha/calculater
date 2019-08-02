@@ -1,9 +1,10 @@
-from calc.calculate import Calculator
-
-calculator = Calculator()
+from calc.calculator import Calculator
 
 
 class MenuBaseCalc:
+
+    def __init__(self):
+        self.calculator = Calculator()
 
     def mainMenu(self):
         flag = True
@@ -16,30 +17,31 @@ class MenuBaseCalc:
 
     def getInputData(self):
         a = input('Первое число ')
-        while not self.isNumber(a):
-            a = int(input('Некорректный формат данных! Введите ещё раз первое число '))
-        d = input('Введите одно из действий: +, -, *, /: ')
-        while d not in ('+' , '-', '*', '/'):
-            d = input('Неизвестная операция! Введите ещё раз одно из действий: +, -, *, /: ')
+        a = self.isNumber(a)
+        operator = input('Введите одно из действий: +, -, *, /: ')
+        while operator not in ('+', '-', '*', '/'):
+            operator = input('Неизвестная операция! Введите ещё раз одно из действий: +, -, *, /: ')
         b = input('Второе число ')
-        while not self.isNumber(b):
-            b = int(input('Некорректный формат данных! Введите ещё раз второе число '))
-        if d == '/':
+        b = self.isNumber(b)
+        if operator == '/':
             while b == 0:
-                b = int(input('Делить на ноль нельзя! Введите ещё раз второе число '))
-        return int(a), d, int(b)
+                b = input('Делить на ноль нельзя! Введите ещё раз второе число ')
+        return int(a), operator, int(b)
 
-    def getResult(self, a, d, b):
-        operatorList = {'+': calculator.sum(a, b), '-': calculator.sub(a, b),
-                        '*': calculator.multi(a, b), '/': calculator.div(a, b)}
-        if d in operatorList.keys():
-            return operatorList[d]
-        else:
-            print('Неизвестная операция')
+    def getResult(self, a, operator, b):
+
+        operatorsList = {'+': self.calculator.sum(a, b), '-': self.calculator.sub(a, b),
+                        '*': self.calculator.multi(a, b), '/': self.calculator.div(a, b)}
+        print(operatorsList)
+        return operatorsList[operator]
 
     def answer(self, s):
-        a, d, b = s
-        print('{} {} {} = {}'.format(a, d, b, self.getResult(a, d, b)))
+        a, operator, b = s
+        print('{} {} {} = {}'.format(a, operator, b, self.getResult(a, operator, b)))
 
     def isNumber(self, a):
-        return str(a).isdigit()
+
+        while not str(a).isdigit():
+            a = input('Некорректный формат данных! Введите ещё раз число ')
+
+        return int(a)
