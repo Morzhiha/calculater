@@ -1,6 +1,6 @@
-from calc.complexCalc import ComplexCalc
+from menu.menuComplexCalc import MenuComplexCalc
 from menu.menuBaseCalc import MenuBaseCalc
 
 # MenuBaseCalc().mainMenu()
 
-ComplexCalc().mainMenu()
+MenuComplexCalc().mainMenu()
