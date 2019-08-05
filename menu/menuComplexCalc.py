@@ -10,9 +10,9 @@ class MenuComplexCalc(MenuBaseCalc):
         super().__init__()
         self.calculator = Calculator()
 
-        self.methodsComplex = ComplexCalc()
-        self.methodsComplList = {'+': self.methodsComplex.sum, '-': self.methodsComplex.sub,
-                         '*': self.methodsComplex.multi, '/': self.methodsComplex.div}
+        self.complexCalc = ComplexCalc()
+        self.methodsComplList = {'+': self.complexCalc.sum, '-': self.complexCalc.sub,
+                         '*': self.complexCalc.multi, '/': self.complexCalc.div}
 
     def mainMenu(self):
         flag = True
@@ -25,33 +25,27 @@ class MenuComplexCalc(MenuBaseCalc):
 
     def getComplex(self):
         a = input('Введите действительную часть первого числа ')
-        a = self.isNumber(a)
+        a = super().isNumber(a)
         b = input('Введите мнимую часть первого числа ')
-        b = self.isNumber(b)
-        z1 = self.isComplexNumber(a, b)
+        b = super().isNumber(b)
+        z1 = ComplexNumber(a, b)
 
         operator = input('Введите одно из действий: +, -, *, /: ')
-        self.isOperator(operator)
+        super().isOperator(operator)
         a = input('Введите действительную часть второго числа ')
-        a = self.isNumber(a)
+        a = super().isNumber(a)
         b = input('Введите мнимую часть второго числа ')
-        b = self.isNumber(b)
+        b = super().isNumber(b)
 
         if operator == '/':
-            a = self.divisionByZero(a)
-            b = self.divisionByZero(b)
-        z2 = self.isComplexNumber(a, b)
+            a = self.isNumber(self.divisionByZero(a))
+            b = self.isNumber(self.divisionByZero(b))
+        z2 = ComplexNumber(a, b)
         return z1, operator, z2
 
     def answer(self, numbers):
         z1, operator, z2 = numbers
         print('{} {} {} = {}'.format(z1, operator, z2, self.getResult(z1, operator, z2)))
-
-    def isComplexNumber(self, num1, num2):
-        while not str(num1).isdigit() and str(num2).isdigit():
-            num1 = input('Некорректный формат данных! Введите ещё раз действительную часть ')
-            num2 = input('Некорректный формат данных! Введите ещё раз мнимую часть ')
-        return ComplexNumber(int(num1), int(num2))
 
     def getResult(self, a, operator, b):
         return self.methodsComplList[operator](a, b)
