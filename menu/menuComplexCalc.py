@@ -1,6 +1,6 @@
 from calc.calculator import Calculator
-from calc.complexCalc import MethodsComplexCalc
-from calc.complexNumber import ComplexNumber
+from calc.complexCalc import ComplexCalc
+from structure.complexNumber import ComplexNumber
 from menu.menuBaseCalc import MenuBaseCalc
 
 
@@ -10,7 +10,7 @@ class MenuComplexCalc(MenuBaseCalc):
         super().__init__()
         self.calculator = Calculator()
 
-        self.methodsComplex = MethodsComplexCalc()
+        self.methodsComplex = ComplexCalc()
         self.methodsComplList = {'+': self.methodsComplex.sum, '-': self.methodsComplex.sub,
                          '*': self.methodsComplex.multi, '/': self.methodsComplex.div}
 
@@ -33,10 +33,14 @@ class MenuComplexCalc(MenuBaseCalc):
         operator = input('Введите одно из действий: +, -, *, /: ')
         self.isOperator(operator)
         a = input('Введите действительную часть второго числа ')
+        a = self.isNumber(a)
         b = input('Введите мнимую часть второго числа ')
-        z2 = self.isComplexNumber(a, b)
+        b = self.isNumber(b)
+
         if operator == '/':
-            z2 = self.divisionByZero(b)
+            a = self.divisionByZero(a)
+            b = self.divisionByZero(b)
+        z2 = self.isComplexNumber(a, b)
         return z1, operator, z2
 
     def answer(self, numbers):
@@ -45,9 +49,9 @@ class MenuComplexCalc(MenuBaseCalc):
 
     def isComplexNumber(self, num1, num2):
         while not str(num1).isdigit() and str(num2).isdigit():
-            num1, num2 = input('Некорректный формат данных! Введите ещё раз действительную и мнимую части ').split()
+            num1 = input('Некорректный формат данных! Введите ещё раз действительную часть ')
+            num2 = input('Некорректный формат данных! Введите ещё раз мнимую часть ')
         return ComplexNumber(int(num1), int(num2))
 
     def getResult(self, a, operator, b):
-        z = self.methodsComplList[operator](a, b)
-        return z
+        return self.methodsComplList[operator](a, b)
