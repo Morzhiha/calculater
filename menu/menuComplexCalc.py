@@ -24,23 +24,14 @@ class MenuComplexCalc(MenuBaseCalc):
                 print('Спасибо за внимание')
 
     def getComplex(self):
-        a = input('Введите действительную часть первого числа ')
-        a = super().isNumber(a)
-        b = input('Введите мнимую часть первого числа ')
-        b = super().isNumber(b)
-        z1 = ComplexNumber(a, b)
+        z1 = self.inputComplex()
 
         operator = input('Введите одно из действий: +, -, *, /: ')
         super().isOperator(operator)
-        a = input('Введите действительную часть второго числа ')
-        a = super().isNumber(a)
-        b = input('Введите мнимую часть второго числа ')
-        b = super().isNumber(b)
 
-        if operator == '/':
-            a = self.isNumber(self.divisionByZero(a))
-            b = self.isNumber(self.divisionByZero(b))
-        z2 = ComplexNumber(a, b)
+        z2 = self.inputComplex()
+        if operator == '/' and z2.getIm() == 0 and z2.getRe() == 0:
+            z2 = self.divisionByZero(z2)
         return z1, operator, z2
 
     def answer(self, numbers):
@@ -49,3 +40,16 @@ class MenuComplexCalc(MenuBaseCalc):
 
     def getResult(self, a, operator, b):
         return self.methodsComplList[operator](a, b)
+
+    def inputComplex(self):
+        a = input('Введите действительную часть числа ')
+        a = super().isNumber(a)
+        b = input('Введите мнимую часть числа ')
+        b = super().isNumber(b)
+        return ComplexNumber(a, b)
+
+    def divisionByZero(self, z):
+        while z.getRe() == 0 and z.getIm() == 0:
+            print('Делить на ноль нельзя!')
+            z = self.inputComplex()
+        return z
