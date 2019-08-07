@@ -21,12 +21,6 @@ class MenuComplexCalc(MenuBaseCalc):
     def getResult(self, a, operator, b):
         return self.methodsComplList[operator](a, b)
 
-    def divisionByZero(self, z):
-        while z.getRe() == 0 and z.getIm() == 0:
-            print('Делить на ноль нельзя!')
-            z = self.inputComplex()
-        return z
-
     def inputComplex(self):
         a = input('Введите действительную часть числа ')
         a = super().isNumber(a)
@@ -34,15 +28,11 @@ class MenuComplexCalc(MenuBaseCalc):
         b = super().isNumber(b)
         return ComplexNumber(a, b)
 
-    def mainMenu(self):
-        flag = True
-        while flag:
-            self.answer(self.getComplex())
-            f = input('Хотите снова? Нажмите Д(да) или Н(нет)')
-            if f.upper() != 'Д' and f.upper() != 'ДА':
-                flag = False
-                print('Спасибо за внимание')
-
+    def divisionByZero(self, z):
+        while z.getRe() == 0 and z.getIm() == 0:
+            print('Делить на ноль нельзя!')
+            z = self.inputComplex()
+        return z
     def getComplex(self):
         z1 = self.inputComplex()
 
@@ -53,3 +43,12 @@ class MenuComplexCalc(MenuBaseCalc):
         if operator == '/' and z2.getIm() == 0 and z2.getRe() == 0:
             z2 = self.divisionByZero(z2)
         return z1, operator, z2
+
+    def mainMenu(self):
+        flag = True
+        while flag:
+            self.answer(self.getComplex())
+            f = input('Хотите снова? Нажмите Д(да) или Н(нет)')
+            if f.upper() != 'Д' and f.upper() != 'ДА':
+                flag = False
+                print('Спасибо за внимание')

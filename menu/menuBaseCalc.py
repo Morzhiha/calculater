@@ -30,15 +30,6 @@ class MenuBaseCalc:
             b = input('Делить на ноль нельзя! Введите ещё раз второе число ')
         return b
 
-    def mainMenu(self):
-        flag = True
-        while flag:
-            self.answer(self.getInputData())
-            f = input('Хотите снова? Нажмите Д(да) или Н(нет)')
-            if f.upper() != 'Д' and f.upper() != 'ДА':
-                flag = False
-                print('Спасибо за внимание')
-
     def getInputData(self):
         a = input('Первое число ')
         a = self.isNumber(a)
@@ -49,3 +40,12 @@ class MenuBaseCalc:
         if operator == '/':
             b = self.divisionByZero(b)
         return a, operator, b
+
+    def mainMenu(self):
+        flag = True
+        while flag:
+            self.answer(self.getInputData())
+            f = input('Хотите снова? Нажмите Д(да) или Н(нет)')
+            if f.upper() != 'Д' and f.upper() != 'ДА':
+                flag = False
+                print('Спасибо за внимание')
