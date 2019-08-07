@@ -14,6 +14,26 @@ class MenuComplexCalc(MenuBaseCalc):
         self.methodsComplList = {'+': self.complexCalc.sum, '-': self.complexCalc.sub,
                          '*': self.complexCalc.multi, '/': self.complexCalc.div}
 
+    def answer(self, numbers):
+        z1, operator, z2 = numbers
+        print('{} {} {} = {}'.format(z1, operator, z2, self.getResult(z1, operator, z2)))
+
+    def getResult(self, a, operator, b):
+        return self.methodsComplList[operator](a, b)
+
+    def divisionByZero(self, z):
+        while z.getRe() == 0 and z.getIm() == 0:
+            print('Делить на ноль нельзя!')
+            z = self.inputComplex()
+        return z
+
+    def inputComplex(self):
+        a = input('Введите действительную часть числа ')
+        a = super().isNumber(a)
+        b = input('Введите мнимую часть числа ')
+        b = super().isNumber(b)
+        return ComplexNumber(a, b)
+
     def mainMenu(self):
         flag = True
         while flag:
@@ -33,23 +53,3 @@ class MenuComplexCalc(MenuBaseCalc):
         if operator == '/' and z2.getIm() == 0 and z2.getRe() == 0:
             z2 = self.divisionByZero(z2)
         return z1, operator, z2
-
-    def answer(self, numbers):
-        z1, operator, z2 = numbers
-        print('{} {} {} = {}'.format(z1, operator, z2, self.getResult(z1, operator, z2)))
-
-    def getResult(self, a, operator, b):
-        return self.methodsComplList[operator](a, b)
-
-    def inputComplex(self):
-        a = input('Введите действительную часть числа ')
-        a = super().isNumber(a)
-        b = input('Введите мнимую часть числа ')
-        b = super().isNumber(b)
-        return ComplexNumber(a, b)
-
-    def divisionByZero(self, z):
-        while z.getRe() == 0 and z.getIm() == 0:
-            print('Делить на ноль нельзя!')
-            z = self.inputComplex()
-        return z

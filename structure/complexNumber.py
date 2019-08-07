@@ -14,8 +14,3 @@ class ComplexNumber:
         z = '(' + str(self.getRe()) + str(self.getIm()) + 'i' + ')' if self.getIm() < 0 else '(' + str(self.getRe()) + ')' \
             if self.getIm() == 0 else '(' + str(self.getRe()) + '+' + str(self.getIm()) + 'i' + ')'
         return z
-        # if self.getIm() < 0:
-        #     return '(' + str(self.getRe()) + str(self.getIm()) + 'i' + ')'
-        # elif self.getIm() == 0:
-        #     return '(' + str(self.getRe()) + ')'
-        # return '(' + str(self.getRe()) + '+' + str(self.getIm()) + 'i' + ')'
