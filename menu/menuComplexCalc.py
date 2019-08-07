@@ -33,6 +33,7 @@ class MenuComplexCalc(MenuBaseCalc):
             print('Делить на ноль нельзя!')
             z = self.inputComplex()
         return z
+    
     def getComplex(self):
         z1 = self.inputComplex()
 
